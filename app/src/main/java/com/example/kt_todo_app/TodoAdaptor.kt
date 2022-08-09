@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kt_todo_app.databinding.ItemTodoBinding
+import kotlinx.android.synthetic.main.item_todo.view.*
 
 
 class TodoAdaptor (
@@ -17,22 +18,26 @@ class TodoAdaptor (
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    private lateinit var binding: ItemTodoBinding
+//    private lateinit var binding: ItemTodoBinding
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
 
 
-        val  inflaterView =   LayoutInflater.from(parent.context).inflate(
-            R.layout.item_todo,
-            parent,
-            false
-        )
-
-        binding = ItemTodoBinding.bind(inflaterView)
+//        val  inflaterView =   LayoutInflater.from(parent.context).inflate(
+//            R.layout.item_todo,
+//            parent,
+//            false
+//        )
+//
+//        binding = ItemTodoBinding.bind(inflaterView)
 
             return  TodoViewHolder(
-              inflaterView
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_todo,
+                    parent,
+                    false
+                )
 
             )
 
@@ -71,14 +76,14 @@ class TodoAdaptor (
 
         val currentTodo = todos[position]
         holder.itemView.apply {
-            binding.tvTodoTitle.text = currentTodo.title
-            binding.cbDone.isChecked = currentTodo.isChecked
+            tvTodoTitle.text = currentTodo.title
+            cbDone.isChecked = currentTodo.isChecked
 
-            toggleStrike( binding.tvTodoTitle,currentTodo.isChecked)
+            toggleStrike( tvTodoTitle,currentTodo.isChecked)
 
-            binding.cbDone.setOnCheckedChangeListener{_, isChecked ->
+            cbDone.setOnCheckedChangeListener{_, isChecked ->
 
-                toggleStrike( binding.tvTodoTitle, isChecked)
+                toggleStrike( tvTodoTitle, isChecked)
                 currentTodo.isChecked = !currentTodo.isChecked
             }
       }

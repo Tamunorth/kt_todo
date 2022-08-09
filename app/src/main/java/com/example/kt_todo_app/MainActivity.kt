@@ -5,35 +5,41 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kt_todo_app.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
     private lateinit var todoAdapter: TodoAdaptor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
+
+
+
+
+        rvTodoItems.layoutManager = LinearLayoutManager(this)
+
 
         todoAdapter = TodoAdaptor(mutableListOf())
 
 
+        rvTodoItems.adapter = todoAdapter
 
-        binding.rvTodoItems.adapter = todoAdapter
 
-        binding.rvTodoItems.layoutManager = LinearLayoutManager(this)
 
-        binding.btnAddTodo.setOnClickListener{
-            val todoTitle = binding.etTodoTItle.text.toString()
+        btnAddTodo.setOnClickListener{
+            val todoTitle = etTodoTItle.text.toString()
             if(todoTitle.isNotEmpty() ){
                 val todo = Todo(todoTitle)
                 todoAdapter.addTodo(todo)
-                binding.etTodoTItle.text.clear()
+                etTodoTItle.text.clear()
             }
         }
 
-        binding.btnDeleteDoneTodos.setOnClickListener{
+        btnDeleteDoneTodos.setOnClickListener{
             todoAdapter.deleteDoneTodos()
         }
 
